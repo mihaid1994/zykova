@@ -9,6 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Отключаем стандартное перетаскивание изображения
   modalImg.setAttribute("draggable", "false");
 
+  // Insert touchmove event listener here
+  modalImg.addEventListener(
+    "touchmove",
+    function (e) {
+      e.preventDefault();
+    },
+    { passive: false }
+  );
+
   // Правильный базовый адрес ресурса (с большой буквой "I")
   const baseURL = "https://zykova-nat.ru/Image/";
 

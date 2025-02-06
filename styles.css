@@ -1,311 +1,322 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: 'Lobster', cursive;
-    background-color: #212121;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  font-family: "Lobster", cursive;
+  background-color: #212121;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* 🔹 Контейнер с логотипом теперь имеет отступ сверху */
 .container {
-    text-align: center;
-    margin-bottom: 20px;
-    padding-top: 60px;
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top: 60px;
 }
 
 /* 🔹 Стили для логотипа */
 .logo {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
 }
 
 /* 🔹 Уменьшенная навигация */
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(50, 50, 50, 0.5);
-    padding: 8px 0;
-    text-align: center;
-    z-index: 1000;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(50, 50, 50, 0.5);
+  padding: 8px 0;
+  text-align: center;
+  z-index: 1000;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 /* 🔹 Выровненные кнопки */
 nav ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0;
+  margin: 0;
 }
 
 /* 🔹 Кнопки навигации */
 nav ul li {
-    display: inline;
-    margin: 0 10px;
+  display: inline;
+  margin: 0 10px;
 }
 
 /* 🔹 Стиль кнопок */
 .nav-link {
-    text-decoration: none;
-    font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
-    color: rgba(200, 200, 200, 0.7);
-    padding: 5px 10px;
-    transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: rgba(200, 200, 200, 0.7);
+  padding: 5px 10px;
+  transition: all 0.3s ease-in-out;
 }
 
 /* 🔹 Активация текущей страницы */
 .nav-link.active {
-    color: rgba(255, 255, 255, 1);
-    font-weight: bold;
+  color: rgba(255, 255, 255, 1);
+  font-weight: bold;
 }
 
 /* 🔹 Заголовок (появляется по словам) */
 .intro {
-    text-align: center;
-    font-size: 36px;
-    margin-top: 100px;
-    color: white;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+  text-align: center;
+  font-size: 36px;
+  margin-top: 100px;
+  color: white;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 }
 
 /* 🔹 Скрываем контент перед анимацией */
-.content, .to-gallery {
-    opacity: 0;
-    transform: translateY(20px);
-    visibility: hidden;
+.content,
+.to-gallery {
+  opacity: 0;
+  transform: translateY(20px);
+  visibility: hidden;
 }
 
 /* 🔹 Плавное появление контента после заголовка */
 .fade-in {
-    animation: fadeInAnimation 1.2s ease-out forwards;
+  animation: fadeInAnimation 1.2s ease-out forwards;
 }
 
 @keyframes fadeInAnimation {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-        visibility: visible;
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-        visibility: visible;
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    visibility: visible;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
 }
 
 /* 🔹 Контент после заголовка */
-.content, .to-gallery {
-    text-align: center;
-    font-size: 24px;
-    color: white;
-    margin-top: 40px;
+.content,
+.to-gallery {
+  text-align: center;
+  font-size: 24px;
+  color: white;
+  margin-top: 40px;
 }
 
 /* 🔹 Исправленные дефисы (тире) – теперь они прямые */
-.content p, .changing-text, .to-gallery p {
-    font-family: 'Montserrat', sans-serif; /* ✅ Читаемый шрифт */
-    font-feature-settings: "liga" 0, "clig" 0;
+.content p,
+.changing-text,
+.to-gallery p {
+  font-family: "Montserrat", sans-serif; /* ✅ Читаемый шрифт */
+  font-feature-settings: "liga" 0, "clig" 0;
 }
 
 /* 🔹 Заголовок теперь без кривых дефисов */
 .intro h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-feature-settings: "liga" 0, "clig" 0;
+  font-family: "Montserrat", sans-serif;
+  font-feature-settings: "liga" 0, "clig" 0;
 }
 
 /* 🔹 Обычный текст поздравления */
 .content p {
-    max-width: 600px;
-    line-height: 1.6;
-    margin: 0 auto 20px;
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0 auto 20px;
 }
 
 /* 🔹 Отдельная строка, где слово сменяется */
 .changing-text {
-    font-size: 28px;
-    font-weight: bold;
-    margin-top: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 15px;
 }
 
 /* 🔹 Меняющееся слово */
 .changing-word {
-    font-weight: bold;
-    color: #ff4081;
-    transition: opacity 0.5s ease-in-out;
+  font-weight: bold;
+  color: #ff4081;
+  transition: opacity 0.5s ease-in-out;
 }
 
 /* 🔹 Кнопка перехода */
 #goToGallery {
-    background-color: #ff4081;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 20px;
-    transition: background 0.3s;
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: background 0.3s;
 }
 
 #goToGallery:hover {
-    background-color: #e91e63;
+  background-color: #e91e63;
 }
 
 /* 🔹 Галерея */
 .gallery {
-    column-count: 3;
-    column-gap: 15px;
-    max-width: 1200px;
-    width: 100%;
+  column-count: 3;
+  column-gap: 15px;
+  max-width: 1200px;
+  width: 100%;
 }
 
 /* 🔹 Фикс для мобильной версии галереи (2 ряда) */
 @media (max-width: 767px) {
-    .gallery {
-        column-count: 2;
-        column-gap: 10px;
-    }
+  .gallery {
+    column-count: 2;
+    column-gap: 10px;
+  }
 }
 
 .gallery img {
-    width: 100%;
-    margin-bottom: 15px;
-    border-radius: 12px;
-    cursor: pointer;
-    display: block;
-    break-inside: avoid;
-    object-fit: cover;
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: block;
+  break-inside: avoid;
+  object-fit: cover;
 }
 
 /* 🔹 Затенение (overlay) */
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 998;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 998;
 }
 
 /* 🔹 Модальное окно */
 .modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    background-color: transparent;
-    padding: 0;
-    border-radius: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.4s ease;
-    z-index: 999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+  z-index: 999;
 }
 
 /* 🔹 Когда модальное окно открыто */
-.modal.show, .overlay.show {
-    opacity: 1;
-    pointer-events: auto;
+.modal.show,
+.overlay.show {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .modal.show {
-    transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
 
 /* 🔹 Исправленное отображение изображений в модальном окне */
 .modal img {
-    width: auto;
-    height: auto;
-    max-width: 90vw;
-    max-height: 90vh;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#modalImg {
+  touch-action: none; /* Отключает жесты браузера (масштабирование, прокрутку) */
+  user-select: none; /* Запрещает выделение текста/элемента */
+  -webkit-user-drag: none; /* Отключает перетаскивание в браузерах на основе WebKit */
 }
 
 /* 🔹 Кнопка закрытия */
 .close {
-    position: absolute;
-    top: -40px;
-    right: -40px;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-    z-index: 1000;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
 }
 
 /* 🔹 Улучшенный стиль блока с поздравлением */
 .message-container {
-    max-width: 800px;
-    background-color: #333;
-    padding: 25px;
-    margin-top: 30px;
-    border-radius: 12px;
-    text-align: left;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
+  background-color: #333;
+  padding: 25px;
+  margin-top: 30px;
+  border-radius: 12px;
+  text-align: left;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* 🔹 Улучшенное форматирование текста */
 .message-container p {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 22px;
-    line-height: 1.6;
-    color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 22px;
+  line-height: 1.6;
+  color: #fff;
 }
 
 /* 🔹 Радужный текст */
 .rainbow-text {
-    background: linear-gradient(
-        90deg, 
-        #ff0000, 
-        #ff7300, 
-        #ffeb00, 
-        #47ff00, 
-        #00ffcc, 
-        #0047ff, 
-        #8a00ff
-    );
-    background-size: 400% 400%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
-    animation: rainbowAnimation 5s infinite linear;
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ff7300,
+    #ffeb00,
+    #47ff00,
+    #00ffcc,
+    #0047ff,
+    #8a00ff
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  animation: rainbowAnimation 5s infinite linear;
 }
 
 @keyframes rainbowAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .highlight {
-    font-weight: bold;
-    color: #ff4081;
-    transition: opacity 0.5s ease-in-out;
+  font-weight: bold;
+  color: #ff4081;
+  transition: opacity 0.5s ease-in-out;
 }
