@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Отключаем стандартное перетаскивание изображения
   modalImg.setAttribute("draggable", "false");
 
-  // Добавляем обработчик touchmove, чтобы предотвратить стандартное поведение браузера
+  // Предотвращаем стандартное поведение touchmove
   modalImg.addEventListener(
     "touchmove",
     function (e) {
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { passive: false }
   );
 
-  // Правильный базовый адрес ресурса (с большой буквой "I")
+  // Базовый адрес ресурса
   const baseURL = "https://zykova-nat.ru/Image/";
 
   // Массив с путями к изображениям
@@ -207,11 +207,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Текущий индекс отображаемого изображения
   let currentIndex = -1;
-  // Переменная для запоминания координаты начала касания или нажатия
+  // Координата начала касания или нажатия
   let startX = null;
 
-  // Функция для анимированного перелистывания изображения (с эффектом слайда)
-  // newIndex — новый индекс слайда, direction — "next" или "prev"
+  // Функция анимированного перелистывания изображения (эффект слайда)
   function slideToImage(newIndex, direction) {
     if (newIndex < 0) newIndex = images.length - 1;
     if (newIndex >= images.length) newIndex = 0;
@@ -244,6 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
       modalImg.src = "";
     }, 300);
     nav.classList.remove("hidden-nav");
+    close.classList.remove("show"); // Скрываем крестик
   }
 
   // Формирование галереи: создаём элемент <img> для каждого изображения
@@ -270,6 +270,7 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.classList.add("show");
       nav.classList.add("hidden-nav");
       overlay.style.backdropFilter = "blur(10px)";
+      close.classList.add("show"); // Показываем крестик при открытии фото
     });
   });
 
@@ -289,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // --- Обработка событий для мыши (десктоп) ---
+  // Обработка событий для мыши (десктоп)
   modalImg.addEventListener("mousedown", function (e) {
     startX = e.clientX;
     e.preventDefault();
@@ -298,7 +299,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (startX === null) return;
     let dx = e.clientX - startX;
     if (dx === 0) {
-      // Ничего не делаем – окно закрывается только через overlay и крестик
+      // Ничего не делаем
     } else if (dx > 0) {
       slideToImage(currentIndex - 1, "prev");
     } else {
@@ -307,7 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
     startX = null;
   });
 
-  // --- Обработка событий для touch (мобильные устройства) ---
+  // Обработка событий для touch (мобильные устройства)
   modalImg.addEventListener("touchstart", function (e) {
     startX = e.touches[0].clientX;
   });

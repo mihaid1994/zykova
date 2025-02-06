@@ -1,18 +1,15 @@
 /* Предотвращаем выделение, перетаскивание и вызов контекстного меню для всех изображений */
 img {
-  -webkit-user-select: none; /* Chrome, Safari, Opera */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
-
-  -webkit-user-drag: none; /* Отключает перетаскивание в WebKit-браузерах */
-  -webkit-touch-callout: none; /* Отключает появление меню при долгом нажатии */
-
-  /* Настройка touch-action помогает контролировать жесты, не блокируя pointer events */
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
   touch-action: manipulation;
 }
 
-/* Ваш существующий CSS код */
+/* Общие стили */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -28,14 +25,13 @@ body {
   align-items: center;
 }
 
-/* 🔹 Контейнер с логотипом теперь имеет отступ сверху */
+/* Контейнер с логотипом */
 .container {
   text-align: center;
   margin-bottom: 20px;
   padding-top: 60px;
 }
 
-/* 🔹 Стили для логотипа */
 .logo {
   width: 100%;
   max-width: 600px;
@@ -45,7 +41,7 @@ body {
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
 }
 
-/* 🔹 Уменьшенная навигация */
+/* Навигация */
 nav {
   position: fixed;
   top: 0;
@@ -58,7 +54,6 @@ nav {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* 🔹 Выровненные кнопки */
 nav ul {
   display: flex;
   justify-content: center;
@@ -68,13 +63,11 @@ nav ul {
   margin: 0;
 }
 
-/* 🔹 Кнопки навигации */
 nav ul li {
   display: inline;
   margin: 0 10px;
 }
 
-/* 🔹 Стиль кнопок */
 .nav-link {
   text-decoration: none;
   font-size: 16px;
@@ -84,13 +77,12 @@ nav ul li {
   transition: all 0.3s ease-in-out;
 }
 
-/* 🔹 Активация текущей страницы */
 .nav-link.active {
   color: rgba(255, 255, 255, 1);
   font-weight: bold;
 }
 
-/* 🔹 Заголовок (появляется по словам) */
+/* Заголовок и анимация появления */
 .intro {
   text-align: center;
   font-size: 36px;
@@ -100,7 +92,6 @@ nav ul li {
   transition: opacity 1s ease-in-out;
 }
 
-/* 🔹 Скрываем контент перед анимацией */
 .content,
 .to-gallery {
   opacity: 0;
@@ -108,7 +99,6 @@ nav ul li {
   visibility: hidden;
 }
 
-/* 🔹 Плавное появление контента после заголовка */
 .fade-in {
   animation: fadeInAnimation 1.2s ease-out forwards;
 }
@@ -126,7 +116,6 @@ nav ul li {
   }
 }
 
-/* 🔹 Контент после заголовка */
 .content,
 .to-gallery {
   text-align: center;
@@ -135,42 +124,36 @@ nav ul li {
   margin-top: 40px;
 }
 
-/* 🔹 Исправленные дефисы (тире) – теперь они прямые */
 .content p,
 .changing-text,
 .to-gallery p {
-  font-family: "Montserrat", sans-serif; /* ✅ Читаемый шрифт */
+  font-family: "Montserrat", sans-serif;
   font-feature-settings: "liga" 0, "clig" 0;
 }
 
-/* 🔹 Заголовок теперь без кривых дефисов */
 .intro h1 {
   font-family: "Montserrat", sans-serif;
   font-feature-settings: "liga" 0, "clig" 0;
 }
 
-/* 🔹 Обычный текст поздравления */
 .content p {
   max-width: 600px;
   line-height: 1.6;
   margin: 0 auto 20px;
 }
 
-/* 🔹 Отдельная строка, где слово сменяется */
 .changing-text {
   font-size: 28px;
   font-weight: bold;
   margin-top: 15px;
 }
 
-/* 🔹 Меняющееся слово */
 .changing-word {
   font-weight: bold;
   color: #ff4081;
   transition: opacity 0.5s ease-in-out;
 }
 
-/* 🔹 Кнопка перехода */
 #goToGallery {
   background-color: #ff4081;
   color: white;
@@ -187,7 +170,7 @@ nav ul li {
   background-color: #e91e63;
 }
 
-/* 🔹 Галерея */
+/* Галерея */
 .gallery {
   column-count: 3;
   column-gap: 15px;
@@ -195,7 +178,6 @@ nav ul li {
   width: 100%;
 }
 
-/* 🔹 Фикс для мобильной версии галереи (2 ряда) */
 @media (max-width: 767px) {
   .gallery {
     column-count: 2;
@@ -213,7 +195,7 @@ nav ul li {
   object-fit: cover;
 }
 
-/* 🔹 Затенение (overlay) */
+/* Overlay */
 .overlay {
   position: fixed;
   top: 0;
@@ -227,7 +209,7 @@ nav ul li {
   z-index: 998;
 }
 
-/* 🔹 Модальное окно */
+/* Модальное окно */
 .modal {
   position: fixed;
   top: 50%;
@@ -242,7 +224,6 @@ nav ul li {
   z-index: 999;
 }
 
-/* 🔹 Когда модальное окно открыто */
 .modal.show,
 .overlay.show {
   opacity: 1;
@@ -253,7 +234,6 @@ nav ul li {
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* 🔹 Исправленное отображение изображений в модальном окне */
 .modal img {
   width: auto;
   height: auto;
@@ -263,18 +243,36 @@ nav ul li {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* 🔹 Кнопка закрытия */
-.close {
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  font-size: 30px;
-  color: white;
+/* Кнопка закрытия (крестик) – по умолчанию скрыта */
+#close {
+  position: fixed;
+  top: 60px; /* Располагаем ниже шапки */
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 1100;
+  user-select: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
-/* 🔹 Улучшенный стиль блока с поздравлением */
+/* При открытом модальном окне добавляем класс show к кресту */
+#close.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Сообщение */
 .message-container {
   max-width: 800px;
   background-color: #333;
@@ -285,7 +283,6 @@ nav ul li {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* 🔹 Улучшенное форматирование текста */
 .message-container p {
   font-family: "Montserrat", sans-serif;
   font-size: 22px;
@@ -293,7 +290,7 @@ nav ul li {
   color: #fff;
 }
 
-/* 🔹 Радужный текст */
+/* Радужный текст */
 .rainbow-text {
   background: linear-gradient(
     90deg,
@@ -328,23 +325,4 @@ nav ul li {
   font-weight: bold;
   color: #ff4081;
   transition: opacity 0.5s ease-in-out;
-}
-
-#close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: 600;
-  cursor: pointer;
-  z-index: 1000;
-  user-select: none;
 }
