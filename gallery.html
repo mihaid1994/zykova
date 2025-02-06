@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>С днем рождения!</title>
+
+    <!-- Подключение шрифтов из Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Навигация -->
+    <nav>
+      <ul>
+        <li><a href="index.html" class="nav-link">Главная</a></li>
+        <li><a href="gallery.html" class="nav-link active">Галерея</a></li>
+        <li><a href="credits.html" class="nav-link">Титры</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <img src="https://zykova-nat.ru/Image/1.png" alt="Логотип" class="logo" />
+    </div>
+
+    <div class="gallery" id="gallery"></div>
+
+    <!-- Затенение -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="modal">
+      <img id="modalImg" src="" alt="" />
+    </div>
+
+    <!-- Блок с поздравлением -->
+    <div class="message-container">
+      <p>
+        <strong class="highlight">Эта галерея</strong> — не просто фотографии.
+        Это отражение <strong class="highlight">тебя</strong>, твоего мира,
+        твоего сияния.
+      </p>
+      <p>
+        Здесь <strong class="highlight">каждый кадр</strong> — история, каждая
+        деталь — часть <strong class="highlight">твоего уникального</strong>
+        <strong class="rainbow-text">вайба</strong>.
+      </p>
+      <p>
+        Пусть этот день напомнит тебе,
+        <strong class="highlight">какая ты особенная</strong> и сколько тепла ты
+        даришь миру!
+      </p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С днем рождения!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html" class="nav-link active">Главная</a></li>
+            <li><a href="gallery.html" class="nav-link">Галерея</a></li>
+            <li><a href="credits.html" class="nav-link">Титры</a></li>
+        </ul>
+    </nav>
+
+    <div class="intro">
+        <h1 id="animatedTitle"></h1>
+    </div>
+
+    <div class="content hidden">
+        <p>
+            Сегодня — твой день. День, который наполнен теплом, светом и счастливыми моментами.  
+            Пусть этот день подарит тебе вдохновение, радость и ощущение, что мир светлее,  
+            когда ты в нем есть.
+        </p>
+
+        <p class="changing-text">
+            Ты <span class="changing-word">особенная</span>.
+        </p>
+    </div>
+
+    <div class="to-gallery hidden">
+        <p>В каждом кадре — момент, в каждом моменте — история...</p>
+        <button id="goToGallery">Перейти в галерею</button>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
