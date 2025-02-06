@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Текущий индекс отображаемого изображения
   let currentIndex = -1;
-  // Запоминаем координату нажатия (или начала касания)
+  // Переменная для запоминания координаты начала касания
   let startX = null;
 
   // Функция для анимированного перелистывания изображения (с эффектом слайда)
@@ -321,20 +321,28 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // --- Обработка событий для touch (мобильные устройства) ---
+  // Фиксируем координату начала касания
   modalImg.addEventListener("touchstart", function (e) {
     startX = e.touches[0].clientX;
   });
 
+  // При окончании касания проверяем смещение
   modalImg.addEventListener("touchend", function (e) {
     if (startX === null) return;
     let dx = e.changedTouches[0].clientX - startX;
-    if (dx === 0) {
+    // Если смещение менее 10px – считаем, что это тап и закрываем окно
+    if (Math.abs(dx) < 10) {
       closeModal();
-    } else if (dx > 0) {
+    } else if (dx > 10) {
       slideToImage(currentIndex - 1, "prev");
-    } else {
+    } else if (dx < -10) {
       slideToImage(currentIndex + 1, "next");
     }
+    startX = null;
+  });
+
+  // Если касание было прервано
+  modalImg.addEventListener("touchcancel", function (e) {
     startX = null;
   });
 });
