@@ -1,3 +1,18 @@
+/* Предотвращаем выделение, перетаскивание и вызов контекстного меню для всех изображений */
+img {
+  -webkit-user-select: none; /* Chrome, Safari, Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+
+  -webkit-user-drag: none; /* Отключает перетаскивание в WebKit-браузерах */
+  -webkit-touch-callout: none; /* Отключает появление меню при долгом нажатии */
+
+  /* Настройка touch-action помогает контролировать жесты, не блокируя pointer events */
+  touch-action: manipulation;
+}
+
+/* Ваш существующий CSS код */
 * {
   box-sizing: border-box;
   margin: 0;
