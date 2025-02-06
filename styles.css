@@ -329,3 +329,22 @@ nav ul li {
   color: #ff4081;
   transition: opacity 0.5s ease-in-out;
 }
+
+#close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 1000;
+  user-select: none;
+}

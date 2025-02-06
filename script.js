@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Отключаем стандартное перетаскивание изображения
   modalImg.setAttribute("draggable", "false");
 
-  // Insert touchmove event listener here
+  // Добавляем обработчик touchmove, чтобы предотвратить стандартное поведение браузера
   modalImg.addEventListener(
     "touchmove",
     function (e) {
@@ -207,15 +207,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Текущий индекс отображаемого изображения
   let currentIndex = -1;
-  // Переменная для запоминания координаты начала касания
+  // Переменная для запоминания координаты начала касания или нажатия
   let startX = null;
 
   // Функция для анимированного перелистывания изображения (с эффектом слайда)
-  // Параметры:
-  //   newIndex — новый индекс слайда,
-  //   direction — направление "next" или "prev"
+  // newIndex — новый индекс слайда, direction — "next" или "prev"
   function slideToImage(newIndex, direction) {
-    // Зацикливание индекса
     if (newIndex < 0) newIndex = images.length - 1;
     if (newIndex >= images.length) newIndex = 0;
     currentIndex = newIndex;
@@ -223,21 +220,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const fileName = images[currentIndex].split("/").pop();
     const finalUrl = `${baseURL}${fileName}`;
 
-    // Анимация сдвига изображения: уход влево или вправо
     modalImg.style.transition = "transform 0.3s ease-out";
     modalImg.style.transform =
       direction === "next" ? "translateX(-100%)" : "translateX(100%)";
 
     setTimeout(() => {
-      // Обновляем изображение
       modalImg.src = finalUrl;
-      // Мгновенно помещаем изображение с противоположной стороны (без анимации)
       modalImg.style.transition = "none";
       modalImg.style.transform =
         direction === "next" ? "translateX(100%)" : "translateX(-100%)";
-      // Принудительный reflow для применения стилей
       void modalImg.offsetWidth;
-      // Возвращаем изображение в центр с анимацией
       modalImg.style.transition = "transform 0.3s ease-out";
       modalImg.style.transform = "translateX(0)";
     }, 300);
@@ -247,7 +239,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function closeModal() {
     modal.classList.remove("show");
     overlay.classList.remove("show");
-    // Убираем эффект размытия
     overlay.style.backdropFilter = "";
     setTimeout(() => {
       modalImg.src = "";
@@ -255,18 +246,15 @@ document.addEventListener("DOMContentLoaded", function () {
     nav.classList.remove("hidden-nav");
   }
 
-  // Формирование галереи: для каждого изображения создаём элемент <img>
+  // Формирование галереи: создаём элемент <img> для каждого изображения
   images.forEach((src, index) => {
     const fileName = src.split("/").pop();
     const finalUrl = `${baseURL}${fileName}`;
-
-    console.log("Загружаем изображение:", finalUrl);
 
     let img = document.createElement("img");
     img.src = finalUrl;
     img.alt = "Gallery Image";
     img.classList.add("gallery-item");
-    // Отключаем перетаскивание для изображений галереи
     img.setAttribute("draggable", "false");
     gallery.appendChild(img);
 
@@ -281,19 +269,13 @@ document.addEventListener("DOMContentLoaded", function () {
       overlay.classList.add("show");
       modal.classList.add("show");
       nav.classList.add("hidden-nav");
-      // Добавляем эффект размытия (Gaussian blur) для оверлея
       overlay.style.backdropFilter = "blur(10px)";
     });
   });
 
-  // Закрытие модального окна по клику на оверлей
+  // Закрытие модального окна по клику на оверлей и по клику на крестик
   overlay.addEventListener("click", closeModal);
-  // Если клик вне фото (на модальном контейнере, но не на самом изображении или кнопке закрытия) – закрываем окно
-  modal.addEventListener("click", function (e) {
-    if (e.target !== modalImg && e.target !== close) {
-      closeModal();
-    }
-  });
+  close.addEventListener("click", closeModal);
 
   // Обработка клавиш для навигации
   document.addEventListener("keydown", function (event) {
@@ -308,19 +290,15 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // --- Обработка событий для мыши (десктоп) ---
-  // Фиксируем координату начала движения
   modalImg.addEventListener("mousedown", function (e) {
     startX = e.clientX;
     e.preventDefault();
   });
-
-  // Отслеживаем отпускание кнопки мыши по всему документу (даже если курсор ушёл за пределы фото)
   document.addEventListener("mouseup", function (e) {
     if (startX === null) return;
     let dx = e.clientX - startX;
-    // Если не произошло смещения – считаем это кликом и закрываем окно
     if (dx === 0) {
-      closeModal();
+      // Ничего не делаем – окно закрывается только через overlay и крестик
     } else if (dx > 0) {
       slideToImage(currentIndex - 1, "prev");
     } else {
@@ -330,18 +308,14 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // --- Обработка событий для touch (мобильные устройства) ---
-  // Фиксируем координату начала касания
   modalImg.addEventListener("touchstart", function (e) {
     startX = e.touches[0].clientX;
   });
-
-  // При окончании касания проверяем смещение
   modalImg.addEventListener("touchend", function (e) {
     if (startX === null) return;
     let dx = e.changedTouches[0].clientX - startX;
-    // Если смещение менее 10px – считаем, что это тап и закрываем окно
     if (Math.abs(dx) < 10) {
-      closeModal();
+      // Тап по фото не закрывает окно
     } else if (dx > 10) {
       slideToImage(currentIndex - 1, "prev");
     } else if (dx < -10) {
@@ -349,9 +323,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     startX = null;
   });
-
-  // Если касание было прервано
-  modalImg.addEventListener("touchcancel", function (e) {
+  modalImg.addEventListener("touchcancel", function () {
     startX = null;
   });
 });
