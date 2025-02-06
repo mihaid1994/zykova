@@ -6,11 +6,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const overlay = document.getElementById("overlay");
   const nav = document.querySelector("nav"); // Выбираем навигацию
 
+  // Убедимся, что контейнер модального окна имеет позиционирование для абсолютного позиционирования дочерних элементов
+  modal.style.position = "relative";
+
+  // Создаем невидимый слой, который будет располагаться поверх фото
+  const interactionLayer = document.createElement("div");
+  interactionLayer.style.position = "absolute";
+  interactionLayer.style.top = "0";
+  interactionLayer.style.left = "0";
+  interactionLayer.style.width = "100%";
+  interactionLayer.style.height = "100%";
+  interactionLayer.style.zIndex = "2"; // должен быть выше, чем у фото
+  interactionLayer.style.backgroundColor = "transparent"; // невидимый фон
+  modal.appendChild(interactionLayer);
+
   // Отключаем стандартное перетаскивание изображения
   modalImg.setAttribute("draggable", "false");
 
-  // Insert touchmove event listener here
-  modalImg.addEventListener(
+  // Добавляем обработчик touchmove на слой, чтобы предотвратить стандартное поведение браузера (масштабирование, выделение)
+  interactionLayer.addEventListener(
     "touchmove",
     function (e) {
       e.preventDefault();
@@ -207,13 +221,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Текущий индекс отображаемого изображения
   let currentIndex = -1;
-  // Переменная для запоминания координаты начала касания
+  // Переменная для запоминания координаты начала касания или нажатия
   let startX = null;
 
   // Функция для анимированного перелистывания изображения (с эффектом слайда)
-  // Параметры:
-  //   newIndex — новый индекс слайда,
-  //   direction — направление "next" или "prev"
+  // Параметры: newIndex — новый индекс слайда, direction — "next" или "prev"
   function slideToImage(newIndex, direction) {
     // Зацикливание индекса
     if (newIndex < 0) newIndex = images.length - 1;
@@ -308,8 +320,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // --- Обработка событий для мыши (десктоп) ---
-  // Фиксируем координату начала движения
-  modalImg.addEventListener("mousedown", function (e) {
+  // Фиксируем координату начала движения через невидимый слой
+  interactionLayer.addEventListener("mousedown", function (e) {
     startX = e.clientX;
     e.preventDefault();
   });
@@ -318,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("mouseup", function (e) {
     if (startX === null) return;
     let dx = e.clientX - startX;
-    // Если не произошло смещения – считаем это кликом и закрываем окно
+    // Если смещения нет – считаем это кликом и закрываем окно
     if (dx === 0) {
       closeModal();
     } else if (dx > 0) {
@@ -330,16 +342,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // --- Обработка событий для touch (мобильные устройства) ---
-  // Фиксируем координату начала касания
-  modalImg.addEventListener("touchstart", function (e) {
+  // Фиксируем координату начала касания через невидимый слой
+  interactionLayer.addEventListener("touchstart", function (e) {
     startX = e.touches[0].clientX;
   });
 
   // При окончании касания проверяем смещение
-  modalImg.addEventListener("touchend", function (e) {
+  interactionLayer.addEventListener("touchend", function (e) {
     if (startX === null) return;
     let dx = e.changedTouches[0].clientX - startX;
-    // Если смещение менее 10px – считаем, что это тап и закрываем окно
+    // Если смещение менее 10px – считаем это тапом и закрываем окно
     if (Math.abs(dx) < 10) {
       closeModal();
     } else if (dx > 10) {
@@ -350,8 +362,8 @@ document.addEventListener("DOMContentLoaded", function () {
     startX = null;
   });
 
-  // Если касание было прервано
-  modalImg.addEventListener("touchcancel", function (e) {
+  // Если касание было прервано, сбрасываем startX
+  interactionLayer.addEventListener("touchcancel", function () {
     startX = null;
   });
 });
